@@ -23,14 +23,46 @@ var diceDOM = document.querySelector('.dice');
 // Шооны зургийг алга болгох
 diceDOM.style.display = 'none';
 
-// Roll Dice товчны эвент листенер
+// Шоог шидэх товчны эвент листенер(Roll Dice)
 document.querySelector('.btn-roll').addEventListener('click', function () {
-  // Шооны тал 1-6хооронд санамсаргүй утга авна
+  // 1-6хооронд санамсаргүй утга гаргаж авна
   diceNumber = Math.floor(Math.random() * 6) + 1;
 
-  // Шооны зургийг гаргаж ирнэ
+  // Шооны зургийг вэб дээр гаргаж ирнэ
   diceDOM.style.display = 'block';
 
-  // Шооны аль талаараа буусныг харуулна
+  // Шооны нүхэнд таарсан зургыг вэб дээр гаргаж ирнэ
   diceDOM.src = `dice-${diceNumber}.png`;
+
+  // Буусан тоо 1-ээс ялгаатай бол идэвхтэй тоглогчийн ээлжийн оноог нэмэгдүүлнэ
+  if (diceNumber !== 1) {
+    //1-ээс ялгаатай буусан тул ээлжийн оноог нэмэгдүүлнэ
+    roundScore += diceNumber;
+
+    // Идэвхтэй тоглогчийн оноог вэб дээр харуулна
+    document.getElementById(`current-${activePlayer}`).textContent = roundScore;
+  } else {
+    // 1 буусан тул ээлжийн оноог 0 болгоно
+    roundScore = 0;
+
+    // Энэ тоглогчийн ээлжийн оноог 0 болгож харуулна
+    document.getElementById(`current-${activePlayer}`).textContent = 0;
+
+    // Идэвхтэй тоглогч байхаа больсон тул Улаан цэгийг алга болгоно
+    document
+      .querySelector(`.player-${activePlayer}-panel`)
+      .classList.remove('active');
+
+    // Шооны зургийг алга болгох
+    diceDOM.style.display = 'none';
+
+    // Тоглогчийн ээлжийг нөгөө тоглогч руу шилжүүлнэ
+    // 1тэй тэнцүү тул идэвхтэй тоглогчийн ээлжийг солино
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+
+    // Идэвхтэй тоглогч болсон ту Улаан цэгийг гаргаж ирэх
+    document
+      .querySelector(`.player-${activePlayer}-panel`)
+      .classList.add('active');
+  }
 });
