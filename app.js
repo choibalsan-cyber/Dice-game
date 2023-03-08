@@ -9,8 +9,7 @@ var scores = [0, 0];
 var roundScore = 0;
 
 // Шооны буусан талыг харуулах хувьсагч
-var diceNumber = Math.floor(Math.random() * 6) + 1;
-console.log(diceNumber);
+var diceNumber;
 
 // Програм эхлэхэд бэлтгэх
 document.getElementById('score-0').textContent = 0;
@@ -18,4 +17,20 @@ document.getElementById('score-1').textContent = 0;
 document.getElementById('current-0').textContent = 0;
 document.getElementById('current-1').textContent = 0;
 
-document.querySelector('.dice').style.display = 'none';
+// Шооны DOM
+var diceDOM = document.querySelector('.dice');
+
+// Шооны зургийг алга болгох
+diceDOM.style.display = 'none';
+
+// Roll Dice товчны эвент листенер
+document.querySelector('.btn-roll').addEventListener('click', function () {
+  // Шооны тал 1-6хооронд санамсаргүй утга авна
+  diceNumber = Math.floor(Math.random() * 6) + 1;
+
+  // Шооны зургийг гаргаж ирнэ
+  diceDOM.style.display = 'block';
+
+  // Шооны аль талаараа буусныг харуулна
+  diceDOM.src = `dice-${diceNumber}.png`;
+});
