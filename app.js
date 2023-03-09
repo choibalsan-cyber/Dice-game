@@ -115,7 +115,7 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
     // Идэвхтэй тоглогчийн 1 ээлжиндээ авсан оноог 0 болгох
     document.getElementById('current-' + activePlayer).textContent = 0;
 
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
       // Тоглоомыг дуусгах төлөвт шилжүүлнэ
       isGameOver = true;
       // Хожсон тоглогчийн нэрний оронд WINNER гэсэн бичиг дэлгэцэнд гаргана
